@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { findAllArticlesAPI } from "./article.api";
+import { findAllArticlesAPI,findArticleByIdAPI } from "./article.api";
 
 
 export const findAllArticles: any =createAsyncThunk('articles/findAllArticles',
@@ -12,6 +12,14 @@ async(page:number)=>{
         // console.log('----- API 를 사용한 경우 -----')
         // console.log('message : '+ message)
         // console.log(JSON.stringify(result))
+        return data
+}
+)
+export const findArticleById: any =createAsyncThunk('articles/findArticleById',
+async(id:number)=>{
+
+    const data:any = await findArticleByIdAPI(id);
+
         return data
 }
 )

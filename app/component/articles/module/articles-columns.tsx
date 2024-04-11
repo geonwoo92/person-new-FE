@@ -1,13 +1,12 @@
 import{GridColDef}from '@mui/x-data-grid'
 import { ArticleColumn } from '../model/article-columns'
-import { Typography } from '@mui/material'
+import { Link, Typography } from '@mui/material'
+import { PG } from '../../common/enums/PG'
 
 
 interface CellType {
     row: ArticleColumn
 }
-
-
 
 export default function ArticleColumns() : GridColDef[]{
     return [
@@ -17,7 +16,9 @@ export default function ArticleColumns() : GridColDef[]{
             sortable: false,
             field: 'id',
             headerName: 'No.',
-            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>  {row.id}</Typography>
+            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}> {row.id}
+            
+            </Typography>
             },
         {
             flex: 0.04,
@@ -25,7 +26,8 @@ export default function ArticleColumns() : GridColDef[]{
             sortable: false,
             field: 'title',
             headerName: '제목',
-            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>  {row.title}</Typography>
+            renderCell: ({row}:CellType) =>  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>
+            <Link href={`${PG.ARTICLE}/detail/${row.id}`} className="underline" > {row.title}</Link></Typography>
             },                       
         {
             flex: 0.04,

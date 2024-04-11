@@ -1,7 +1,8 @@
-import { Typography } from "@mui/material"
+import { Link, Typography } from "@mui/material"
 import { GridColDef } from "@mui/x-data-grid"
 import { UserColumn } from "../model/userColumn"
 import { MYTypography } from "../../common/style/cell"
+import { PG } from "../../common/enums/PG"
 
 interface CellType {
     row: UserColumn
@@ -39,7 +40,9 @@ export default function UsersColumns(): GridColDef[] {
             field: 'name',
             minWidth: 30,
             headerName: '이름',
-            renderCell: ({ row }: CellType) => MYTypography(row.name, "1.2rem" )
+            renderCell: ({ row }: CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>
+            <Link href={`${PG.USER}/detail/${row.id}`} className="underline" > {row.name} </Link></Typography>
+     
         },
         {
             flex: 0.04,

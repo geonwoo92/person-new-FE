@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { findAllBoardsAPI } from "./board.api";
+import { findAllBoardsAPI, findBoardByIdAPI } from "./board.api";
 
 
 
@@ -13,6 +13,17 @@ async(page:number, {rejectWithValue})=>{
         // console.log('----- API 를 사용한 경우 -----')
         // console.log('message : '+ message)
         // console.log(JSON.stringify(result))
+        return data
+}
+)
+
+export const findBoardById: any =createAsyncThunk('boards/findBoardById',
+async(id:number, {rejectWithValue})=>{
+    
+    
+    const data:any = await findBoardByIdAPI(id);
+
+    
         return data
 }
 )

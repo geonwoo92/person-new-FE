@@ -2,11 +2,12 @@
 
 export interface IArticle{
     id?: number
-    writer? : number
+    writerId? : number
+    boardId?:number
     title?: string
     content?: string
     regDate? : string
     modDate? : string
-    array: []
-
+    array?: IArticle[]
+    json?: IArticle
 }

@@ -8,6 +8,6 @@ export interface IUser{
     regDate? : string
     modDate? : string
     adreesId? : number
-    array: []
+    array: IUser[]
 
 }

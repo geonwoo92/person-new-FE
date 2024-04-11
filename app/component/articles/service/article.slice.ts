@@ -1,7 +1,8 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './article.init';
-import { findAllArticles } from './article.service';
+import { findAllArticles, findArticleById } from './article.service';
+
 
 const articleThunks = [findAllArticles]
 
@@ -29,15 +30,23 @@ export const articleSlice = createSlice({
     extraReducers: builder => {
         const {pending, rejected} = status;
         builder
-        .addCase(findAllArticles.fulfilled, handleFulfilled)
-    }
-})
+        .addCase(findAllArticles.fulfilled, (state: any, {payload}: any) =>{state.array = payload}) 
+        .addCase(findArticleById.fulfilled, (state: any, {payload}: any) =>{state.json = payload})
+    }}) 
+        
 
 export const getAllArticles = (state: any) => {
-    console.log('------------------ Before useSelector ---------------')
-    console.log(JSON.stringify(state.article.array))
-    return state.article.array;
+        console.log('------------------ Before useSelector ---------------')
+        console.log(JSON.stringify(state.article.array))
+        return state.article.array;
+    }
+    
+export const getArticleById = (state: any) => {
+    
+    return state.article.json
+    ;
 }
+
 
 export const {} = articleSlice.actions
 

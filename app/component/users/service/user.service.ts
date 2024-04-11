@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { findAllUsersAPI } from "./user.api";
+
+import { findAllUsersAPI, findUserByIdAPI } from "./user.api";
 
 
 
@@ -14,6 +15,18 @@ export const findAllUsers: any = createAsyncThunk(
         // console.log('----- API 를 사용한 경우 -----')
         // console.log('message : '+ message)
         // console.log(JSON.stringify(result))
+        return data
+    }
+)
+
+export const findUserById: any = createAsyncThunk(
+    'users/findUserById',
+    async (id: number)=>{
+        
+        const data:any = await  findUserByIdAPI(id);
+
+        const {message, result}:any = data
+    
         return data
     }
 )

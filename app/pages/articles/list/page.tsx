@@ -6,17 +6,8 @@ import { NextPage } from "next";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { findAllArticles } from "@/app/component/articles/service/article.service";
-import Columns from "@/app/component/articles/module/articles-columns";
 import { getAllArticles } from "@/app/component/articles/service/article.slice";
 import ArticleColumns from "@/app/component/articles/module/articles-columns";
-// import React from "react";
-interface IArticle {
-  id: number,
-  title: string,
-  content: string,
-  writer: string,
-  registerDate: string
-}
 
 
 const ArticlesPage: NextPage = ({data}:any) => {

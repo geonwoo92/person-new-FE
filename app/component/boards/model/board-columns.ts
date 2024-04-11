@@ -1,6 +1,6 @@
 export interface BoardColumn{
-    boardType: string;
-    id?: string;
-    regDate?: string;
-    modDate?: string;
+    id?: number
+    boardType?: string
+    regDate?: string
+    modDate?: string
 }
