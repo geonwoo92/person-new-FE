@@ -9,7 +9,8 @@ export const initialState:IArticle = {
     regDate: '',
     modDate: '',
     array: [],
-    json: {}
+    json: {},
+    count:0
 
    
 }

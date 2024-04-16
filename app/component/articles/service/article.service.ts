@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { findAllArticlesAPI,findArticleByIdAPI } from "./article.api";
+import { DeleteArticleByIdAPI, UpdateArticleByIdAPI, findAllArticlesAPI,findArticleByIdAPI } from "./article.api";
 
 
 export const findAllArticles: any =createAsyncThunk('articles/findAllArticles',
@@ -22,4 +22,10 @@ async(id:number)=>{
 
         return data
 }
+)
+export const DeleteArticleById: any =createAsyncThunk('articles/DeleteArticleById',
+async(id:number, {rejectWithValue})=>  await DeleteArticleByIdAPI(id)
+)
+export const UpdateArticleById: any =createAsyncThunk('articles/UpdateArticleById',
+async(id:number, {rejectWithValue})=>  await UpdateArticleByIdAPI(id)
 )

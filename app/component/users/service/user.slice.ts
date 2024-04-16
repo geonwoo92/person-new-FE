@@ -1,9 +1,13 @@
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from '../model/user.model';
+import { findAllUsers, findUserById, findlogin } from './user.service';
 
-import { initialState } from "./user.init";
-import { findAllUsers, findUserById, } from "./user.service";
 
-const userThunks = [findAllUsers]
+
+
+const userThunks = [findAllUsers,findUserById]
 
 const status = {
     pending: 'pending',
@@ -11,43 +15,41 @@ const status = {
     rejected: 'rejected'
 }
 
-const handleFulfilled = (state:any, {payload}:any)=>{
-    console.log('-------------')
-    state.array= payload
-    console.log(state.array)
+interface IAuth{
+    message?: string,
+    token?: string
 }
 
-const handlePending = (state: any) => {
+interface UserState  {
+    array? : Array<IUser>,
+    json?:IUser,
+    auth?: IAuth
 }
 
-const handleRejected = (state: any) => {
+export const initialState:UserState = {
+    json: {} as IUser,
+    array : [],
+    auth: {} as IAuth
 }
-
 
 export const userSlice = createSlice({
     name: "users",
     initialState,
     reducers: {},
-    extraReducers:builder => {
+    extraReducers: builder => {
         const {pending, rejected} = status;
+
         builder
-        .addCase(findAllUsers.fulfilled, (state:any, {payload}:any)=>{state.array= payload})
-        .addCase(findUserById.fulfilled, (state:any, {payload}:any)=>{state.array= payload})
+        .addCase(findAllUsers.fulfilled,  (state: any, {payload}: any) => {state.array=payload})
+        .addCase(findUserById.fulfilled,  (state: any, {payload}: any) => {state.json=payload})
+        .addCase(findlogin.fulfilled,  (state: any, {payload}: any) => {state.auth=payload})
+  
     }
-
 })
-export const getAllUsers = (state: any) => {
-    console.log('------------------ Before useSelector ---------------')
-    console.log(JSON.stringify(state.user.array))
-    return state.user.array;
-}
-
-export const getUserById = (state: any) => {
-
-    return state.user.array;
-}
-
+export const getAllUsers = (state: any) =>(state.user.array)
+export const getUserById = (state: any) =>(state.user.json)
+export const getAuth = (state: any) =>(state.user.auth)
 
 export const {} = userSlice.actions
 
-export default userSlice.reducer
+export default userSlice.reducer;

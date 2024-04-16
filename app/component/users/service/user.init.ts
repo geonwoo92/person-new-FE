@@ -12,6 +12,6 @@ export const initialState:IUser = {
     regDate : '',
     modDate : '',
     adreesId : 0,
-    array: []
+   
 
 }

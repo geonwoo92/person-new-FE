@@ -7,7 +7,7 @@ export const findAllBoards: any =createAsyncThunk('boards/findAllBoards',
 async(page:number, {rejectWithValue})=>{
     console.log('findAllBoards page:'+ page)
     
-    const data:any = await findAllBoardsAPI(1);
+    const data:any = await findAllBoardsAPI(page);
 
         const {message, result}:any = data
         // console.log('----- API 를 사용한 경우 -----')
@@ -22,6 +22,7 @@ async(id:number, {rejectWithValue})=>{
     
     
     const data:any = await findBoardByIdAPI(id);
+    const {message, result}:any = Date
 
     
         return data

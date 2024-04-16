@@ -4,6 +4,7 @@ import { store } from "./index";
 import { persistStore } from "redux-persist";
 
 persistStore(store);
+
 export default function ReduxProvider({
   children,
 }: {

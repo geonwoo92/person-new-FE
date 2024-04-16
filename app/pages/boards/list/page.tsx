@@ -3,13 +3,22 @@ import Columns from "@/app/component/articles/module/articles-columns"
 import BoardColumns from "@/app/component/boards/module/boards-columns"
 import { findAllBoards } from "@/app/component/boards/service/board.service"
 import { getAllBoards } from "@/app/component/boards/service/board.slice"
-import { Box } from "@mui/material"
+import { Box, Link } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
-import { NextPage } from "next"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-const BoardListPage: NextPage = ({data}:any) => {
+const cards = [
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/mountain-nightview.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/autumn.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/babypinetree.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/beach.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/purpleflowers.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/starrysky.jpg",
+  "https://www.tailwindtap.com/assets/components/horizontal-carousel/lake.jpg",
+];
+
+export default function BoardListPage({data}:any) {
     const dispatch = useDispatch()
  
    const allBoards: [] = useSelector(getAllBoards)
@@ -31,11 +40,45 @@ const BoardListPage: NextPage = ({data}:any) => {
     }, [])
     
     return (<>
-        <h2>게시판 목록</h2>
-        <Box sx={{ height: 400, width: '100%' }}>
+         <table  className="table-auto w-4/5 border-x-black" style={{margin: '50px auto'}}>
+        <thead>
+          <tr>
+            <td>
+            <div className="flex flex-col items-center justify-center w-full bg-white-300">
+      <div className="flex overflow-x-scroll snap-x snap-mandatory max-w-6xl no-scrollbar">
+        {cards.map((data, index) => {
+          return (
+            <section
+              className="flex-shrink-0 w-full snap-center justify-center items-center"
+              key={index}
+            >
+              <img
+                src={data}
+                alt="Images to scroll horizontal"
+                className="w-full h-[500px]"
+              />
+            </section>
+          );
+        })}
+      </div>
+    </div>
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td 
+        align="center" className="w-full  bg-gray-400 border-black border-4 p-8 h-20 text-[20px]" 
+        >
+       <Link href=''>게시판 글쓰기</Link>
+        </td>
+    </tr>
+    <tr>
+        <td align="center"  className="h-300">
      {allBoards && <DataGrid
         rows={allBoards}
-        columns={BoardColumns()}
+        columns={Columns()}
         initialState={{
           pagination: {
             paginationModel: {
@@ -47,8 +90,10 @@ const BoardListPage: NextPage = ({data}:any) => {
         checkboxSelection
         disableRowSelectionOnClick
       />}
-    </Box>
+     </td>
+    </tr>
+       
+        </tbody>
+      </table>
     </>)
 }
-
-export default BoardListPage

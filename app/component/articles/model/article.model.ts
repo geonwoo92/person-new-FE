@@ -10,4 +10,5 @@ export interface IArticle{
     modDate? : string
     array?: IArticle[]
     json?: IArticle
+    count?:number
 }
